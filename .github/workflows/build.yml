@@ -19,15 +19,14 @@ jobs:
     env:
       GOARCH: 386
       GOOS: windows
+      SOURCE_DIR: ${{ env.GITHUB_WORKSPACE }}\src
 
     steps:
       - name: Clone Target Repo
-        run: git clone ${{ matrix.repo }} .\src
-
-      - name: Change Directory
-        run: cd src && cd ${{ matrix.directory }}
+        run: git clone ${{ matrix.repo }} $env:SOURCE_DIR
 
       - name: Build
+        working-directory: ${{ env.SOURCE_DIR }}\${{ matrix.directory }}
         run: go build -o ${{ matrix.artifact-target }}
 
       - name: Upload Artifact
