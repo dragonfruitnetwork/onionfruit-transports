@@ -23,11 +23,12 @@ jobs:
     steps:        
       - name: Clone Target Repo
         shell: cmd
-        run: git clone --progress --verbose ${{ matrix.repo }} ${{ github.workspace }}
+        run: git clone ${{ matrix.repo }} ${{ github.workspace }}
 
       - name: Build
-        working-directory: ${{ github.workspace }}\${{ matrix.directory }}
-        run: go build -o ${{ github.workspace }}\${{ matrix.artifact-target }}
+        run: | 
+          cd ${{ github.workspace }}\${{ matrix.directory }}
+          go build -o ${{ github.workspace }}\${{ matrix.artifact-target }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
