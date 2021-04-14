@@ -23,7 +23,7 @@ jobs:
     steps:        
       - name: Clone Target Repo
         shell: cmd
-        run: git clone ${{ matrix.repo }} ${{ github.workspace }}
+        run: git clone ${{ matrix.repo }}
 
       - name: Build
         run: | 
