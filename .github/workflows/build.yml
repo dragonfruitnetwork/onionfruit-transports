@@ -21,6 +21,9 @@ jobs:
       GOOS: windows
 
     steps:
+      - name: Update Git
+        run: choco install git
+        
       - name: Clone Target Repo
         shell: cmd
         run: git clone ${{ matrix.repo }} ${{ github.workspace }}
