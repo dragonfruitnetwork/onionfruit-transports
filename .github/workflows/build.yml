@@ -9,23 +9,23 @@ jobs:
         matrix:
           include:
             - repo: 'https://git.torproject.org/pluggable-transports/meek.git'
-              directory: '/meek-client'
+              directory: 'meek-client'
               artifact-target: 'meek.exe'
 
             - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
-              directory: '/'
-              artifact-target: 'obfs4.exe'
+              directory: './'
+              artifact-target: 'obfs4.exe'   
+              
+    env:
+      GOARCH: 386
+      GOOS: windows
 
     steps:
       - name: Clone Target Repo
-        run: git clone ${{ matrix.repo }} ./workbench
+        run: git clone ${{ matrix.repo }} .\src
 
       - name: Change Directory
-        shell: cmd
-        run: cd ./workbench${{ matrix.directory }}
-
-      - name: Fetch Dependencies
-        run: go get -d
+        run: cd src && cd ${{ matrix.directory }}
 
       - name: Build
         run: go build -o ${{ matrix.artifact-target }}
@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.artifact-target }}
-          path: ${{ matrix.artifact-target }}
+          path: ${{ env.GITHUB_WORKSPACE }}\${{ matrix.artifact-target }}
