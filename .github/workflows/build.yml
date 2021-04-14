@@ -35,3 +35,4 @@ jobs:
         with:
           name: ${{ matrix.artifact-target }}
           path: ${{ github.workspace }}\${{ matrix.artifact-target }}
+          retention-days: 2
