@@ -22,14 +22,14 @@ jobs:
 
     steps:
       - name: Clone Target Repo
-        run: git clone ${{ matrix.repo }} ${{ env.GITHUB_WORKSPACE }}\src
+        run: git clone ${{ matrix.repo }} ${{ github.workspace }}\src
 
       - name: Build
-        working-directory: ${{ env.GITHUB_WORKSPACE }}\src\${{ matrix.directory }}
-        run: go build -o ${{ env.GITHUB_WORKSPACE }}\out\${{ matrix.artifact-target }}
+        working-directory: ${{ github.workspace }}\src\${{ matrix.directory }}
+        run: go build -o ${{ github.workspace }}\out\${{ matrix.artifact-target }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.artifact-target }}
-          path: ${{ env.GITHUB_WORKSPACE }}\out\${{ matrix.artifact-target }}
+          path: ${{ github.workspace }}\out\${{ matrix.artifact-target }}
