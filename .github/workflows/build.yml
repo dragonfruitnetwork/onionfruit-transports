@@ -20,13 +20,10 @@ jobs:
       GOARCH: 386
       GOOS: windows
 
-    steps:
-      - name: Update Git
-        run: choco install git
-        
+    steps:        
       - name: Clone Target Repo
         shell: cmd
-        run: git clone ${{ matrix.repo }} ${{ github.workspace }}
+        run: git clone --progress --verbose ${{ matrix.repo }} ${{ github.workspace }}
 
       - name: Build
         working-directory: ${{ github.workspace }}\${{ matrix.directory }}
