@@ -19,18 +19,17 @@ jobs:
     env:
       GOARCH: 386
       GOOS: windows
-      SOURCE_DIR: ${{ env.GITHUB_WORKSPACE }}\src
 
     steps:
       - name: Clone Target Repo
-        run: git clone ${{ matrix.repo }} $env:SOURCE_DIR
+        run: git clone ${{ matrix.repo }} ${{ env.GITHUB_WORKSPACE }}\src
 
       - name: Build
-        working-directory: ${{ env.SOURCE_DIR }}\${{ matrix.directory }}
-        run: go build -o ${{ matrix.artifact-target }}
+        working-directory: ${{ env.GITHUB_WORKSPACE }}\src\${{ matrix.directory }}
+        run: go build -o ${{ env.GITHUB_WORKSPACE }}\out\${{ matrix.artifact-target }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.artifact-target }}
-          path: ${{ env.GITHUB_WORKSPACE }}\${{ matrix.artifact-target }}
+          path: ${{ env.GITHUB_WORKSPACE }}\out\${{ matrix.artifact-target }}
