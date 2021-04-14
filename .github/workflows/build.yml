@@ -21,6 +21,7 @@ jobs:
         run: git clone ${{ matrix.repo }} ./workbench
 
       - name: Change Directory
+        shell: cmd
         run: cd ./workbench${{ matrix.directory }}
 
       - name: Fetch Dependencies
