@@ -9,11 +9,11 @@ jobs:
         matrix:
           include:
             - repo: 'https://git.torproject.org/pluggable-transports/meek.git'
-              directory: 'meek-client'
+              directory: 'meek\meek-client'
               artifact-target: 'meek.exe'
 
             - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
-              directory: './'
+              directory: '\obfs4'
               artifact-target: 'obfs4.exe'   
               
     env:
