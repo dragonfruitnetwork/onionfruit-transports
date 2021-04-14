@@ -13,7 +13,7 @@ jobs:
               artifact-target: 'meek.exe'
 
             - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
-              directory: 'obfs4'
+              directory: 'obfs4\obfs4proxy'
               artifact-target: 'obfs4.exe'   
               
     env:
