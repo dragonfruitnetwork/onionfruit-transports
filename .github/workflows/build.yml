@@ -5,32 +5,32 @@ jobs:
   build:
     runs-on: windows-latest
     
-  strategy:
-      matrix:
-        include:
-          - repo: 'https://git.torproject.org/pluggable-transports/meek.git'
-            directory: '/meek-client'
-            artifact-target: 'meek.exe'
-            
-          - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
-            directory: '/'
-            artifact-target: 'obfs4.exe'
+    strategy:
+        matrix:
+          include:
+            - repo: 'https://git.torproject.org/pluggable-transports/meek.git'
+              directory: '/meek-client'
+              artifact-target: 'meek.exe'
 
-  steps:
-    - name: Clone Target Repo
-      run: git clone ${{ matrix.repo }} ./workbench
-      
-    - name: Change Directory
-      run: cd ./workbench${{ matrix.directory }}
-      
-    - name: Fetch Dependencies
-      run: go get -d
-      
-    - name: Build
-      run: go build -o ${{ matrix.artifact-target }}
-      
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.artifact-target }}
-        path: ${{ matrix.artifact-target }}
+            - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
+              directory: '/'
+              artifact-target: 'obfs4.exe'
+
+    steps:
+      - name: Clone Target Repo
+        run: git clone ${{ matrix.repo }} ./workbench
+
+      - name: Change Directory
+        run: cd ./workbench${{ matrix.directory }}
+
+      - name: Fetch Dependencies
+        run: go get -d
+
+      - name: Build
+        run: go build -o ${{ matrix.artifact-target }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.artifact-target }}
+          path: ${{ matrix.artifact-target }}
