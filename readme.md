@@ -13,4 +13,4 @@ This houses the GitHub Action that builds the pluggable transports used in Onion
 Issues with the usage of these tranports or the build script itself can be repored at the main [OnionFruit™ Connect Repository](https://github.com/dragonfruitnetwork/onionfruit).
 
 ### License
-This component is licensed under the MIT License.
+This component is licensed under the MIT License. Please note the components build have their own licenses. Refer to the specfic projects for more information
