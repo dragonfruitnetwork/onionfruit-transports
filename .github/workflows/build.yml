@@ -11,10 +11,17 @@ jobs:
             - repo: 'https://git.torproject.org/pluggable-transports/meek.git'
               directory: 'meek\meek-client'
               artifact-target: 'meek.exe'
+              release-target: 'v0.35.0'
 
             - repo: 'https://git.torproject.org/pluggable-transports/obfs4.git'
               directory: 'obfs4\obfs4proxy'
-              artifact-target: 'obfs4.exe'   
+              artifact-target: 'obfs4.exe'
+              release-target: 'obfs4proxy-0.0.11'
+              
+            - repo: 'https://git.torproject.org/pluggable-transports/snowflake.git'
+              directory: 'snowflake\proxy'
+              artifact-target: 'snowflake.exe'
+              release-target: 'v1.1.0'
               
     env:
       GOARCH: 386
@@ -23,7 +30,7 @@ jobs:
     steps:        
       - name: Clone Target Repo
         shell: cmd
-        run: git clone ${{ matrix.repo }}
+        run: git clone ${{ matrix.repo }} --depth 1 --branch ${{ matrix.release-target }}
 
       - name: Build
         run: | 
